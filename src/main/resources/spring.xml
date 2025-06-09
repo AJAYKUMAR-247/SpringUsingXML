@@ -1,0 +1,36 @@
+<!-- when you're going to create a xml file to define the bean, the folder should be directly under the main -->
+
+
+<!-- This is container which is given by spring to contain the list of beans (Search : spring 6 xml configuration) -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+
+    <!-- When defining a bean, two things we have to define, the 1st is id and the second is class, means the path of that particular class. -->
+    <bean id="alien" class="org.example.Alien"></bean>
+
+    <!-- If you gave the same class, it will automatically create a new object. Means if you gave the same class two times, two objects will be created. -->
+    <bean id="alien1" class="org.example.Alien"></bean>
+
+    <!-- scope is used to define the scope of that bean, if you declare a bean as prototype, the obj will not be created once the container created
+    it will only be created when getBean is called -->
+    <bean id="lap" class="org.example.Laptop" scope="prototype"></bean>
+
+
+    <!-- Setter Injection, means when you want to set a default value once the obj is created, you can use this setter injection.
+    This will call the setter method and set's the value that's why this is called Setter Injection -->
+    <bean id="lap1" class="org.example.Laptop">
+
+        <!-- You have to use the property tag to set a value for property in a class, here lapPrice is the property which is a primitive, that's why we're using value,
+        if it is object then use ref-->
+        <property name="lapPrice" value="20000"></property>
+
+        <!--Now you want to create a object, then create the object 1st in the sml file i.e: alien and use that as the reference -->
+        <property name="alienn" ref="alien"></property>
+    </bean>
+
+
+</beans>
