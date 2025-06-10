@@ -10,14 +10,14 @@
     <!-- bean definitions here -->
 
     <!-- When defining a bean, two things we have to define, the 1st is id and the second is class, means the path of that particular class. -->
-    <bean id="alien" class="org.example.Alien"></bean>
+    <bean id="alien" class="org.example.Alien"/>
 
     <!-- If you gave the same class, it will automatically create a new object. Means if you gave the same class two times, two objects will be created. -->
-    <bean id="alien1" class="org.example.Alien"></bean>
+    <bean id="alien1" class="org.example.Alien"/>
 
     <!-- scope is used to define the scope of that bean, if you declare a bean as prototype, the obj will not be created once the container created
     it will only be created when getBean is called -->
-    <bean id="lap" class="org.example.Laptop" scope="prototype"></bean>
+    <bean id="lap" class="org.example.Laptop" scope="prototype"/>
 
 
     <!-- Setter Injection, means when you want to set a default value once the obj is created, you can use this setter injection.
@@ -26,11 +26,45 @@
 
         <!-- You have to use the property tag to set a value for property in a class, here lapPrice is the property which is a primitive, that's why we're using value,
         if it is object then use ref-->
-        <property name="lapPrice" value="20000"></property>
+        <property name="lapPrice" value="20000"/>
 
         <!--Now you want to create a object, then create the object 1st in the sml file i.e: alien and use that as the reference -->
-        <property name="alienn" ref="alien"></property>
+        <property name="alienn" ref="alien"/>
     </bean>
 
+    <!-- As like the setter injection, we can set the default value using the constructor-->
+    <!-- We have to specify the index, where the sequence followed in the constructor parameter of that particular class-->
+    <bean id="student" class="org.example.Student">
+        <constructor-arg index="0" value="01"/>
+        <constructor-arg index="1" value="Ajay"/>
+        <constructor-arg index="2" ref="lap1"/>
+    </bean>
+
+
+    <bean id="Des" class="org.example.Desktop" primary="true">
+        <constructor-arg index="0" value="01"/>
+        <constructor-arg index="1" value="Dell"/>
+    </bean>
+
+    <!-- Now consider you're have a class which is implementing from a interface, at that time to mention which class to take from that interface we can autowire-->
+    <!-- When you want to do Autowire, constructor injection will not work, because autowire is only apploicable for property (Setter) injection-->
+    <!-- You have to specify the a bean with the same name of that property in that class, then while matching with a name it will take and work -->
+    <bean id="employee" class="org.example.Employee" autowire="byName">
+        <property name="id" value="01"/>
+        <property name="name" value="AjayKumar"/>
+    </bean>
+
+    <!-- Autowire using byType, this will check for the type of the object and if find any bean of that type it will work-->
+    <!-- If it founds two bean of same type in this xml file, it will get confuse which one to use and will throw an error. To avoid that use
+    primary in any of those same type beans available, so that it will use that without confusion -->
+    <bean id="employee1" class="org.example.Employee" autowire="byType">
+        <property name="id" value="02"/>
+        <property name="name" value="Kumar"/>
+    </bean>
+
+    <bean id="com" class="org.example.MacBook">
+        <constructor-arg index="0" value="01"/>
+        <constructor-arg index="1" value="Latest"/>
+    </bean>
 
 </beans>

@@ -31,4 +31,12 @@ public class Laptop {
     public void laptop() {
         System.out.println("Enter something to code");
     }
+
+    @Override
+    public String toString() {
+        return "Laptop{" +
+                "LapPrice=" + LapPrice +
+                ", alienn=" + alienn +
+                '}';
+    }
 }

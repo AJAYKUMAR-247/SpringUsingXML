@@ -46,5 +46,21 @@ public class App {
         // Setter Injection
         Laptop lap3 = (Laptop) context.getBean("lap1");
         System.out.println(lap3.LapPrice);
+
+
+        // Constructor Injection
+        Student stu = (Student) context.getBean("student");
+        System.out.println(stu.getLap());
+
+        Desktop desktop = (Desktop) context.getBean("Des");
+
+        Employee employee = (Employee) context.getBean("employee");
+        System.out.println(employee.getCom());
+
+        MacBook macBook = (MacBook) context.getBean("com");
+        System.out.println(macBook);
+
+        Employee employee1 = (Employee) context.getBean("employee1");
+        System.out.println(employee1.getCom());
     }
 }
