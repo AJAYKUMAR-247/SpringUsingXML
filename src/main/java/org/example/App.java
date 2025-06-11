@@ -62,5 +62,14 @@ public class App {
 
         Employee employee1 = (Employee) context.getBean("employee1");
         System.out.println(employee1.getCom());
+
+        // If you saw above we're using the method getBean(), which will return a obj
+        // There is a another class which will return a object of type in which class object we want
+        Employee employee2 = context.getBean("employee1", Employee.class);
+        // This will return the Employee object directly
+
+        // There is one more method, which will take only one parameter as type of object we want
+        // But in the xml file if same type of beans available more than one, then we have to make any one a primary=true, so that it will create obj of that
+        Employee employee3 = context.getBean(Employee.class);
     }
 }

@@ -37,7 +37,14 @@
     <bean id="student" class="org.example.Student">
         <constructor-arg index="0" value="01"/>
         <constructor-arg index="1" value="Ajay"/>
-        <constructor-arg index="2" ref="lap1"/>
+        <!--  <constructor-arg index="2" ref="lap1"/> -->
+
+        <!-- If you see above we want to create a bean for refering and we're not going to use it for any other purpose. At that time we can create a inner bean-->
+        <constructor-arg index="2">
+            <bean id="lap7" class="org.example.Laptop"/>
+        </constructor-arg>
+
+
     </bean>
 
 
@@ -49,7 +56,7 @@
     <!-- Now consider you're have a class which is implementing from a interface, at that time to mention which class to take from that interface we can autowire-->
     <!-- When you want to do Autowire, constructor injection will not work, because autowire is only apploicable for property (Setter) injection-->
     <!-- You have to specify the a bean with the same name of that property in that class, then while matching with a name it will take and work -->
-    <bean id="employee" class="org.example.Employee" autowire="byName">
+    <bean id="employee" class="org.example.Employee" autowire="byName" primary="true">
         <property name="id" value="01"/>
         <property name="name" value="AjayKumar"/>
     </bean>
@@ -65,6 +72,18 @@
     <bean id="com" class="org.example.MacBook">
         <constructor-arg index="0" value="01"/>
         <constructor-arg index="1" value="Latest"/>
+    </bean>
+
+
+    <!-- If you have more number of beans in your application and you're starting your application. At that time the application will become slow because
+    you're creating all the beans, no matter it is required or not. To avoid that you can use lazy-init="true", so if we add this,
+    the bean will be created only if we're going to use that bean, this we can achieve, by changing the scope as prototype, but if you want that scope as singleton
+    then use this
+
+    after a lazy-initialized bean is created and used, it will not be removed — it stays in the Spring container just like any other singleton bean
+    (if its scope is singleton, which is the default).-->
+    <bean id="com2" class="org.example.Computer" lazy-init="true">
+        <property name="macId" value="98"/>
     </bean>
 
 </beans>
